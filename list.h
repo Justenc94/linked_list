@@ -3,11 +3,7 @@ Name: Justen Crockett
 Assignment: 03
 Purpose:
 ***********************************************************/
-#include "main.h"
+#ifndef LIST_H
+#define LIST_H
 
-int main() {
-
-
-
-    return 0;
-}
+#endif //LIST_H

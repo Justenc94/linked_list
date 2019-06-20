@@ -3,11 +3,5 @@ Name: Justen Crockett
 Assignment: 03
 Purpose:
 ***********************************************************/
-#include "main.h"
+#include "list.h"
 
-int main() {
-
-
-
-    return 0;
-}
