@@ -5,8 +5,11 @@ Purpose:
 ***********************************************************/
 #ifndef LIST_H
 #define LIST_H
+#include <string>
+#include <iostream>
 #include "functions.h"
 #include "data.h"
+using namespace std;
 
 class List
 {
@@ -16,6 +19,7 @@ class List
     bool addNode(int, string);
     bool deleteNode(int);
     bool getNode(int, DataNode*);
+    void printList(bool);
     int getCount();
     bool clear();
 
@@ -25,11 +29,12 @@ class List
     int count;
 
     //helper methods
-    void addHead();
+    int linearSearch(int);
+    void addHead(int, string);
     void deleteHead();
-    void addMiddle();
+    void addMiddle(int, string);
     void deleteMiddle();
-    void addTail();
+    void addTail(int, string);
     void deleteTail();
 
 };
