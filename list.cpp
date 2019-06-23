@@ -52,14 +52,15 @@ bool List::clear(){
 
 //********************************************HELPER METHODS********************************************
 
-
-int List::linearSearchMiddle(int id_search){
-    Node *tmpNode = head;
+//method to determine if an id is already in list and if not - return position where node should be added
+int List::linearSearch(int id_search){
+    Node *temp_node;
+    temp_node = head;
+    int found;
     for (int i = 0; i < count; i++) {
-        if(tmpNode->id == tmpNode->next->id){
-            return (i+1);
-        }else if(tmpNode->next != nullptr){
-            tmpNode = tmpNode->next;
+        if(id_search == temp_node->id){
+            found = i;
+            return found;
         }else{
             return -1;
         }
