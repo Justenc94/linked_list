@@ -32,7 +32,14 @@ bool List::getNode(int, DataNode *){
 }
 
 void List::printList(bool){
-    cout << head->id << endl;
+    Node *temp_node;
+    temp_node = head;
+    for (int i = 0; i < count; i++) {
+        cout << "\tNode Number: " << (i+1) << endl;
+        cout << "ID: " << temp_node->id << endl;
+        cout << "DATA: " << temp_node->data << endl << endl;
+        temp_node = temp_node->next;
+    }
 }
 
 int List::getCount(){
@@ -46,24 +53,34 @@ bool List::clear(){
 //********************************************HELPER METHODS********************************************
 
 
-int List::linearSearch(int id){
-
+int List::linearSearchMiddle(int id_search){
+    Node *tmpNode = head;
+    for (int i = 0; i < count; i++) {
+        if(tmpNode->id == tmpNode->next->id){
+            return (i+1);
+        }else if(tmpNode->next != nullptr){
+            tmpNode = tmpNode->next;
+        }else{
+            return -1;
+        }
+    }
 }
 
 void List::addHead(int new_id, string new_data){
-    Node *tmp = new Node;
-    tmp->id = new_id;
-    tmp->data = new_data;
-    tmp->next = nullptr;
-    tmp->back = nullptr;
-    head = tmp;
+    Node *temp_node = new Node;
+    temp_node->id = new_id;
+    temp_node->data = new_data;
+    temp_node->next = nullptr;
+    temp_node->back = nullptr;
+    head = temp_node;
+    count++;
 }
 
 void List::deleteHead(){
 
 }
 
-void List::addMiddle(int id, string data){
+void List::addMiddle(int new_id, string new_data){
 
 }
 
@@ -72,7 +89,15 @@ void List::deleteMiddle(){
 }
 
 void List::addTail(int id, string data){
-
+    Node *new_node = new Node;
+    Node *temp_node;
+    new_node->id = id;              //add id to new node
+    new_node->data = data;          //add data to new node
+    temp_node = head;               //TODO: need to make this equal to the last node in the list
+    new_node->back = temp_node;
+    new_node->next = nullptr;
+    temp_node->next = new_node;
+    count++;
 }
 
 void List::deleteTail(){

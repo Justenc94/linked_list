@@ -29,7 +29,7 @@ class List
     int count;
 
     //helper methods
-    int linearSearch(int);
+    int linearSearchMiddle(int);
     void addHead(int, string);
     void deleteHead();
     void addMiddle(int, string);
