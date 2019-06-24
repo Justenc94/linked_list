@@ -9,7 +9,7 @@ int main() {
 
     srand(time(nullptr));
 
-    // making number of test cases from
+    // making number of test node data from
     // TEST_CASE_OFFSET to TEST_CASE_BASE + TEST_CASE_OFFSET (5 - 25)
     int num_tests = rand() % (TEST_CASE_BASE + 1) + TEST_CASE_OFFSET;
 
@@ -22,7 +22,7 @@ int main() {
 
     List new_item;
 
-    //filling arrays with test case data
+    //filling arrays with test node data
     cout << "Making " << num_tests << " random test nodes..." << endl;
     make_test_cases(ids, data, num_tests);
     cout << "TEST NODES CREATED" << endl << endl;

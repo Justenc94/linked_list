@@ -13,7 +13,7 @@ List::List() {
 //********************************************PUBLIC METHODS********************************************
 bool List::addNode(int new_id, string new_data) {
     Node *temp_node = head;
-    if (searchIds(new_id) == -1) {
+    if (searchIds(new_id) == count) {
         Node *new_node = new Node;
         new_node->id = new_id;
         new_node->data = new_data;
@@ -39,10 +39,10 @@ bool List::addNode(int new_id, string new_data) {
 
 bool List::deleteNode(int del_id){
     int search = searchIds(del_id);
-    if(search == head->id){
+    if(del_id == head->id){
         deleteHead(search);
         return true;
-    }else if(search == count-1){
+    }else if(search == count){
         deleteTail(search);
         return true;
     }else{
@@ -96,7 +96,7 @@ int List::searchIds(int id_search){
         }
         temp_node = temp_node->next;
     }
-    return -1;
+    return count;
 }
 
 int List::getNodePos(int id_search){
@@ -128,7 +128,10 @@ void List::addHead(Node *new_node){
 }
 
 void List::deleteHead(int del_pos){
-
+    Node *temp_node = head;
+    head = temp_node->next;
+    delete temp_node;
+    count--;
 }
 
 void List::addMiddle(Node *new_node){
@@ -172,7 +175,11 @@ void List::addTail(Node *new_node){
 }
 
 void List::deleteTail(int del_pos){
-
+    Node *temp_node = head;
+    for (int i = 0; i < count-1; i++) {
+        temp_node = temp_node->next;
+    }
+    temp_node->back->next = nullptr;
+    delete temp_node;
+    count--;
 }
-
-
