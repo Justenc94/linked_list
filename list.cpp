@@ -33,6 +33,8 @@ bool List::addNode(int new_id, string new_data) {
                 temp_node = temp_node->next;
             }
         }
+    }else{
+        return false;
     }
 }
 
@@ -47,13 +49,12 @@ bool List::getNode(int, DataNode *){
 void List::printList(bool){
     Node *temp_node;
     temp_node = head;
-    cout << "========== Printing List ==========" << endl;
+    cout << "============ Printing List ============" << endl;
     for (int i = 0; i < count; i++) {
-        cout << "\tNode Number: " << (i+1) << endl;
-        cout << "ID: " << temp_node->id << endl;
-        cout << "DATA: " << temp_node->data << endl << endl;
+        cout << "ID: " << temp_node->id << "\tDATA: " << temp_node->data << "\tNode Number: " << (i+1) << endl;
         temp_node = temp_node->next;
     }
+    cout << endl;
 }
 
 int List::getCount(){
@@ -70,12 +71,14 @@ bool List::clear(){
 int List::searchIds(int id_search){
     Node *temp_node = head;
     for (int i = 0; i < count; i++) {
-        if(id_search == temp_node->id){
-            return -1;
+        while(temp_node->next != nullptr){
+            if(id_search == temp_node->id){
+                return -1;
+            }
+            temp_node = temp_node->next;
         }
-        temp_node = temp_node->next;
     }
-    return count;
+    return 0;
 }
 
 int List::getNodePos(int id_search){
@@ -90,18 +93,18 @@ int List::getNodePos(int id_search){
     return -1;
 }
 
-void List::addHead(Node *temp_node){
-    Node *temp_head = head;
-    if(temp_head == nullptr){
-        head = temp_node;
-        temp_node->next = nullptr;
-        temp_node->back = nullptr;
+void List::addHead(Node *new_node){
+    Node *temp_node = head;
+    if(temp_node == nullptr){
+        head = new_node;
+        new_node->next = nullptr;
+        new_node->back = nullptr;
         count++;
-    }else {
-        temp_node->next = temp_head;
-        temp_node->back = nullptr;
-        temp_head->back = temp_node;
-        temp_head->next = temp_head->next->next;
+    }else{
+        new_node->next = temp_node;
+        new_node->back = nullptr;
+        temp_node->back = new_node;
+        head = new_node;
         count++;
     }
 }
