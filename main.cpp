@@ -49,5 +49,12 @@ int main() {
     new_item.getNode(get_id, tempDataNode);
     cout << "\nID in Data Node: " << tempDataNode->id << "\tData in Data Node: " << tempDataNode->data << endl;
 
+    cout << "\nTesting list clear..." << endl;
+    if(new_item.clear()){
+        cout << "List Cleared." << endl << endl;
+    }
+
+    new_item.printList(true);
+
     return 0;
 }
