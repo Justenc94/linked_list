@@ -42,5 +42,12 @@ int main() {
     cout << "Item Deleted." << endl;
     new_item.printList(true);
 
+    int get_id;
+    auto tempDataNode = new DataNode;
+    cout << "(Testing get node method) Enter ID to search for: ";
+    cin >> get_id;
+    new_item.getNode(get_id, tempDataNode);
+    cout << "\nID in Data Node: " << tempDataNode->id << "\tData in Data Node: " << tempDataNode->data << endl;
+
     return 0;
 }

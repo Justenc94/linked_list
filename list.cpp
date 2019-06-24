@@ -54,7 +54,7 @@ bool List::deleteNode(int del_id){
 bool List::getNode(int id_search, DataNode *temp_data_node){
     Node *temp_node = head;
     int search = searchIds(id_search);
-    for (int i = 0; i < search-1; i++) {
+    for (int i = 0; i < search; i++) {
         if(id_search == temp_node->id){
             temp_data_node->id = temp_node->id;
             temp_data_node->data = temp_node->data;
