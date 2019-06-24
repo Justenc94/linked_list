@@ -29,12 +29,13 @@ class List
     int count;
 
     //helper methods
-    int linearSearchMiddle(int);
-    void addHead(int, string);
+    int searchIds(int);
+    int getNodePos(int);
+    void addHead(Node*);
     void deleteHead();
-    void addMiddle(int, string);
-    void deleteMiddle();
-    void addTail(int, string);
+    void addMiddle(Node*);
+    void deleteMiddle(int);
+    void addTail(Node*);
     void deleteTail();
 
 };

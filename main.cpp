@@ -34,5 +34,12 @@ int main() {
 
     new_item.printList(true);
 
+    int search_id;
+    cout << "(Testing delete node method) Enter ID to search for: ";
+    cin >> search_id;
+    new_item.deleteNode(search_id);
+    cout << "Item Deleted." << endl;
+    new_item.printList(true);
+
     return 0;
 }
