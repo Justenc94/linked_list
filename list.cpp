@@ -22,7 +22,7 @@ bool List::addNode(int new_id, string new_data){
             return true;
         }else{
             while(temp_node->next != nullptr && temp_node->next->id < new_node->id){
-                addMiddle(new_node);
+                addTail(new_node);
                 return true;
             }
             addTail(new_node);
@@ -105,8 +105,20 @@ void List::deleteMiddle(){
 
 }
 
-void List::addTail(Node *temp_node){
-
+void List::addTail(Node *new_node){
+    Node *temp_node = head;
+    for (int i = 0; i < count; ++i) {
+        if(temp_node->id < new_node->id){
+            if(temp_node->id > new_node->id || temp_node->next == nullptr){
+                temp_node->next = new_node;
+                new_node->next = nullptr;
+                new_node->back = temp_node;
+                count++;
+            }else{
+                temp_node = temp_node->next;
+            }
+        }
+    }
 }
 
 void List::deleteTail(){
