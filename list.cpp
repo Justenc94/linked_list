@@ -12,15 +12,24 @@ List::List() {
 
 //********************************************PUBLIC METHODS********************************************
 bool List::addNode(int new_id, string new_data){
-    if(head != nullptr){
-        if(head->next == nullptr){
-            addTail(new_id, new_data);
+    Node *temp_node = head;
+    if(searchIds(new_id) != -1){
+        Node *new_node = new Node;
+        new_node->id = new_id;
+        new_node->data = new_data;
+        if(temp_node == nullptr || temp_node->id > new_node->id){
+            addHead(new_node);
+            return true;
         }else{
-            addMiddle(new_id, new_data);
+            while(temp_node->next != nullptr && temp_node->next->id < new_node->id){
+                addMiddle(new_node);
+                return true;
+            }
+            addTail(new_node);
+            return true;
         }
-    }else{
-        addHead(new_id, new_data);
     }
+    return false;
 }
 
 bool List::deleteNode(int){
@@ -53,35 +62,42 @@ bool List::clear(){
 //********************************************HELPER METHODS********************************************
 
 //method to determine if an id is already in list and if not - return position where node should be added
-int List::linearSearch(int id_search){
-    Node *temp_node;
-    temp_node = head;
-    int found;
+int List::searchIds(int id_search){
+    Node *temp_node = head;
     for (int i = 0; i < count; i++) {
         if(id_search == temp_node->id){
-            found = i;
-            return found;
-        }else{
             return -1;
         }
+        temp_node = temp_node->next;
     }
+    return count;
 }
 
-void List::addHead(int new_id, string new_data){
-    Node *temp_node = new Node;
-    temp_node->id = new_id;
-    temp_node->data = new_data;
-    temp_node->next = nullptr;
-    temp_node->back = nullptr;
-    head = temp_node;
-    count++;
+void List::getNodePos(int id_search, string temp_data){
+
+}
+
+void List::addHead(Node *temp_node){
+    Node *temp_head = head;
+    if(temp_head == nullptr){
+        head = temp_node;
+        temp_node->next = nullptr;
+        temp_node->back = nullptr;
+        count++;
+    }else {
+        temp_node->next = temp_head;
+        temp_node->back = nullptr;
+        temp_head->back = temp_node;
+        temp_head->next = temp_head->next->next;
+        count++;
+    }
 }
 
 void List::deleteHead(){
 
 }
 
-void List::addMiddle(int new_id, string new_data){
+void List::addMiddle(Node *temp_node){
 
 }
 
@@ -89,16 +105,8 @@ void List::deleteMiddle(){
 
 }
 
-void List::addTail(int id, string data){
-    Node *new_node = new Node;
-    Node *temp_node;
-    new_node->id = id;              //add id to new node
-    new_node->data = data;          //add data to new node
-    temp_node = head;               //TODO: need to make this equal to the last node in the list
-    new_node->back = temp_node;
-    new_node->next = nullptr;
-    temp_node->next = new_node;
-    count++;
+void List::addTail(Node *temp_node){
+
 }
 
 void List::deleteTail(){
