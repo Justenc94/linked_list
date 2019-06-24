@@ -20,17 +20,18 @@ int main() {
         data[i] = new char[BUFFER_SIZE];
     }
 
+    List new_item;
+
     //filling arrays with test case data
     cout << "Making " << num_tests << " random test nodes..." << endl;
     make_test_cases(ids, data, num_tests);
     cout << "TEST NODES CREATED" << endl << endl;
-    List new_item;
 
     cout << "Adding test nodes to list..." << endl;
     for (int j = 0; j < num_tests; j++) {
         new_item.addNode(ids[j], data[j]);
     }
-    cout << "ADDED " << num_tests << " RANDOM NODES" << endl << endl;
+    cout << "ADDED " << new_item.getCount() << " RANDOM NODES" << endl << endl;
 
     new_item.printList(true);
 

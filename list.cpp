@@ -40,20 +40,29 @@ bool List::addNode(int new_id, string new_data) {
 bool List::deleteNode(int del_id){
     int search = searchIds(del_id);
     if(search == head->id){
-        deleteHead();
+        deleteHead(search);
         return true;
     }else if(search == count-1){
-        deleteTail();
+        deleteTail(search);
         return true;
     }else{
         deleteMiddle(search);
         return true;
     }
-
 }
 
-bool List::getNode(int, DataNode *){
-    return true;
+bool List::getNode(int id_search, DataNode *temp_data_node){
+    Node *temp_node = head;
+    int search = searchIds(id_search);
+    for (int i = 0; i < search-1; i++) {
+        if(id_search == temp_node->id){
+            temp_data_node->id = temp_node->id;
+            temp_data_node->data = temp_node->data;
+            return true;
+        }
+        temp_node = temp_node->next;
+    }
+    return false;
 }
 
 void List::printList(bool){
@@ -118,7 +127,7 @@ void List::addHead(Node *new_node){
     }
 }
 
-void List::deleteHead(){
+void List::deleteHead(int del_pos){
 
 }
 
@@ -162,7 +171,7 @@ void List::addTail(Node *new_node){
     }
 }
 
-void List::deleteTail(){
+void List::deleteTail(int del_pos){
 
 }
 
