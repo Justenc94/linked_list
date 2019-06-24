@@ -7,7 +7,7 @@ Purpose:
 
 int main() {
 
-    srand(time(NULL));
+    srand(time(nullptr));
 
     // making number of test cases from
     // TEST_CASE_OFFSET to TEST_CASE_BASE + TEST_CASE_OFFSET (5 - 25)
@@ -21,26 +21,16 @@ int main() {
     }
 
     //filling arrays with test case data
-    cout << "Making " << num_tests << " test cases..." << endl;
+    cout << "Making " << num_tests << " random test nodes..." << endl;
     make_test_cases(ids, data, num_tests);
-    cout << "Test cases done" << endl << endl;
+    cout << "TEST NODES CREATED" << endl << endl;
     List new_item;
 
-    new_item.addNode(1, "TESTING ADD HEAD");
-    //new_item.addNode(2, "TESTING ADD TAIL");
-    //new_item.addNode(5, "TESTING ADD TAIL");
-    //new_item.addNode(4, "TESTING ADD MIDDLE");
-
-    new_item.printList(true);
-
+    cout << "Adding test nodes to list..." << endl;
     for (int j = 0; j < num_tests; j++) {
-        cout << "Printing elements in test: " << data[j] << "\t\tID: " << ids[j] << endl;
-    }
-
-    for (int j = 0; j < num_tests; j++) {
-        cout << "ADDING RANDOM NODE" << endl;
         new_item.addNode(ids[j], data[j]);
     }
+    cout << "ADDED " << num_tests << " RANDOM NODES" << endl << endl;
 
     new_item.printList(true);
 
