@@ -40,7 +40,7 @@ bool List::addNode(int new_id, string new_data) {
 bool List::deleteNode(int del_id){
     int search = searchIds(del_id);
     if(del_id == head->id){
-        deleteHead(search);
+        deleteHead();
         return true;
     }else if(search == count){
         deleteTail(search);
@@ -91,13 +91,17 @@ int List::getCount(){
 bool List::clear(){
     Node *temp_node = head;
     Node *del_node;
-    for (int i = 0; i < count; i++) {
-        del_node = temp_node->next;
-        delete temp_node;
-        temp_node = del_node;
+    if(count != 0){
+        for (int i = 0; i < count; i++) {
+            del_node = temp_node->next;
+            delete temp_node;
+            temp_node = del_node;
+        }
+        count = 0;
+        return true;
+    }else{
+        return false;
     }
-    count = 0;
-    return true;
 }
 
 //********************************************HELPER METHODS********************************************
@@ -145,11 +149,14 @@ void List::addHead(Node *new_node){
     }
 }
 
-void List::deleteHead(int del_pos){
+void List::deleteHead(){
     Node *temp_node = head;
     head = temp_node->next;
     delete temp_node;
     count--;
+    if(count == 0){
+        head = nullptr;
+    }
 }
 
 void List::addMiddle(Node *new_node){

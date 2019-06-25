@@ -32,7 +32,7 @@ class List
     int searchIds(int);
     int getNodePos(int);
     void addHead(Node*);
-    void deleteHead(int);
+    void deleteHead();
     void addMiddle(Node*);
     void deleteMiddle(int);
     void addTail(Node*);

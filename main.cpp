@@ -184,6 +184,7 @@ int main() {
                 del_count++;
             }else if(list.getCount() == 0){
                 cout << "Cannot delete ID, list is empty." << endl;
+                del_count++;
             }
         }
     }
@@ -234,7 +235,7 @@ int main() {
     }
     cout << "\n*****Testing get node complete*****" << endl << endl;
 
-    //TODO: Need to build a test to show that you cannot delete an item in an empty list or an ID that doesnt exist
+    //************************************** TESTING DELETE NODE SPECIAL CASES ***************************************
 
     //testing delete on empty list and ID that doesnt exist
     cout << "Testing delete node on ID that is not in list " << num_wrong_ids << " times...\n" << endl;
@@ -244,18 +245,75 @@ int main() {
             cout << "ID not found. Cannot delete ID." << endl;
         }else{
             list.deleteNode(random_ids[i]);                       //if getnode is succesful returns get of that ID
-            cout << "Delete Node on ID: " << tempGetNode->id << "\tData: " << tempGetNode->data << endl;
+            cout << "Delete Node on ID: " << tempGetNode->id << "\tData: " << tempGetNode->data << endl << endl;
         }
+    }
+
+    //testing delete list on an empty list
+    cout << "\nTesting delete node on all original random nodes..." << endl;
+    list.clear();                              //clear list for tests
+    cout << "Cleared list..." << endl << endl;
+
+    for (int i = 0; i < num_tests; i++) {
+        list.getNode(ids[i], nodeToGet);
+        if(nodeToGet->id == i){
+            list.deleteNode(nodeToGet->id);
+            cout << "Deleted Node on ID: " << ids[i] << endl;
+        }else if(list.getCount() == 0) {
+            cout << "Tried to delete node for ID: " << ids[i] << "\t Unable to delete node, list is empty." << endl;
+        }else{
+                cout << "ID not found. Cannot get ID." << endl;
+            }
     }
     cout << "\n*****Testing delete node on wrong IDs and empty list complete*****" << endl << endl;
 
 
-
-
-
-
     //TODO: Need to build a test to show that you can clear a list, with cases: 0, 1, or greater than 1 nodes
 
+    //************************************** TESTING CLEAR LIST SPECIAL CASES ***************************************
+
+    int add_node_num;   //variable to determine whether one or more nodes will be added
+
+    //testing clear on empty list
+
+    cout << "Node count: " << list.getCount() << endl;
+    cout << "Testing clear list on empty list..." << endl;
+
+    if (list.clear()){
+        cout << "List successfully cleared" << endl;
+    }else{
+        cout << "List is already empty. Not cleared." << endl;
+    }
+    cout << "Node count: " << list.getCount() << endl << endl;
+
+    //testing clear on list with 1 node
+    add_node_num = 1;
+
+    for (int i = 0; i < add_node_num; i++) {
+        list.addNode(ids[i], data[i]);
+    }
+
+    cout << "Node count: " << list.getCount() << endl;
+    cout << "Testing clear list on list with 1 node..." << endl;
+
+    if (list.clear()){
+        cout << "List successfully cleared" << endl;
+    }else{
+        cout << "List is already empty. Not cleared." << endl;
+    }
+    cout << "Node count: " << list.getCount() << endl << endl;
+
+    //testing clear on list with more than 1 node
+
+    cout << "Node count: " << list.getCount() << endl;
+    cout << "Testing clear list on list with more than 1 node..." << endl;
+
+    if (list.clear()){
+        cout << "List successfully cleared" << endl;
+    }else{
+        cout << "List is already empty. Not cleared." << endl;
+    }
+    cout << "Node count: " << list.getCount() << endl << endl;
 
     return 0;
 }
