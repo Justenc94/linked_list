@@ -130,7 +130,7 @@ int main() {
     cout << "Node count: " << list.getCount() << endl;
     cout << "Deleting head list node " << num_to_del << " times..." << endl;
     for (int i = 0; i < num_to_del; i++) {
-        for (int j = 0; j <= MAX_ADD_TAIL_ID; j++) {
+        for (int j = 0; j <= MAX_ADD_TAIL_ID+10000; j++) {
             if(list.getNode(j, nodeToDel) && del_count < num_to_del){
                 list.deleteNode(nodeToDel->id);
                 del_count++;
@@ -151,7 +151,7 @@ int main() {
     cout << "Node count: " << list.getCount() << endl;
     cout << "Deleting middle list node " << num_to_del << " times... (2nd node)" << endl;
     for (int i = 0; i < num_to_del; i++) {
-        for (int j = 0; j <= MAX_ADD_TAIL_ID; j++) {
+        for (int j = 0; j <= MAX_ADD_TAIL_ID+10000; j++) {
             if(list.getNode(j, nodeToDel) && del_count < num_to_del+1){     //bypasses first id to be deleted by incrementing
                 if(del_count ==  0){                                        //count without deleting the first match (the head)
                     del_count++;
@@ -194,7 +194,26 @@ int main() {
         cout << "\nerror: something went wrong." << endl;
     }
 
-    
+    //******************************************TESTING GET NODE******************************************
+
+    int times_to_get = list.getCount();
+    int get_counter = 0;
+    auto nodeToGet = new DataNode;
+    auto tempGetNode = new DataNode;
+
+
+    cout << "======= Testing getNode() on entire list =======" << endl;
+    for (int j = 0; j <= MAX_ADD_TAIL_ID+10000; j++) {
+        list.getNode(j, nodeToGet);
+        if(nodeToGet->id == j){
+            list.getNode(nodeToGet->id, tempGetNode);
+            cout << "Get Node on ID: " << tempGetNode->id << "\tData: " << tempGetNode->data << endl;
+            get_counter++;
+        }
+    }
+    cout << "================================================" << endl;
+
+
 
     return 0;
 }
