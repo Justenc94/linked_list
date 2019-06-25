@@ -196,11 +196,10 @@ int main() {
 
     //******************************************TESTING GET NODE******************************************
 
-    int times_to_get = list.getCount();
+    //calls the getnode method on every item in list to show that any position is get-able
     int get_counter = 0;
     auto nodeToGet = new DataNode;
     auto tempGetNode = new DataNode;
-
 
     cout << "======= Testing getNode() on entire list =======" << endl;
     for (int j = 0; j <= MAX_ADD_TAIL_ID+10000; j++) {
@@ -211,8 +210,32 @@ int main() {
             get_counter++;
         }
     }
-    cout << "================================================" << endl;
+    cout << "================================================" << endl << endl;
 
+    //testing that getnode will not get a ID that is not in the list
+    tempGetNode = new DataNode;
+    int num_wrong_ids = rand() % (TEST_HEAD_TAIL_BASE+1) + TEST_HEAD_TAIL_OFFSET;   //number of times that get wrong id should iterate
+    int random_ids[num_wrong_ids];                                                  //stores random wrong ids
+    //generate random ids that are too large to be inside list
+    for (int i = 0; i < num_wrong_ids; i++) {
+        int random_id = rand() % MAX_ADD_TAIL_ID + 25000;
+        random_ids[i] = random_id;
+    }
+
+    cout << "Testing get line on ID that is not in list " << num_wrong_ids << " times..." << endl;
+    for (int i = 0; i < num_wrong_ids; i++) {
+        cout << "Searching list for ID: " << random_ids[i] << endl;
+        if(!list.getNode(random_ids[i], tempGetNode)){                       //if getnode is not successful in search
+            cout << "Getnode returned false. ID not found." << endl;
+        }else{
+            list.getNode(random_ids[i], tempGetNode);                       //if getnode is succesful returns get of that ID
+            cout << "Get Node on ID: " << tempGetNode->id << "\tData: " << tempGetNode->data << endl;
+        }
+    }
+
+    //TODO: Need to build a test to show that you cannot delete an item in an empty list or an ID that doesnt exist
+
+    //TODO: Need to build a test to show that you can clear a list, with cases: 0, 1, or greater than 1 nodes
 
 
     return 0;
