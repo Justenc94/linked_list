@@ -73,12 +73,12 @@ void List::printList(bool){
         cout << "\t    LIST IS EMPTY" << endl;
         cout << "=======================================" << endl << endl;
     }else {
-        cout << "============ Printing List ============" << endl;
+        cout << "================ Printing List ================" << endl;
         for (int i = 0; i < count; i++) {
             cout << "ID: " << temp_node->id << "\tDATA: " << temp_node->data << "\tNode Number: " << (i + 1) << endl;
             temp_node = temp_node->next;
         }
-        cout << "=======================================" << endl << endl;
+        cout << "===============================================" << endl << endl;
     }
 }
 

@@ -20,41 +20,131 @@ int main() {
         data[i] = new char[BUFFER_SIZE];
     }
 
-    List new_item;
+    //creates list object
+    List list;
+    //creates DataNode struct to use getNode method
+    auto tempDataNode = new DataNode;
+    //bool to use as switch for printing
+    bool print_list_switch = true;
 
     //filling arrays with test node data
     cout << "Making " << num_tests << " random test nodes..." << endl;
     make_test_cases(ids, data, num_tests);
-    cout << "TEST NODES CREATED" << endl << endl;
+    cout << "TEST NODES CREATED" << endl;
 
-    cout << "Adding test nodes to list..." << endl;
-    for (int j = 0; j < num_tests; j++) {
-        new_item.addNode(ids[j], data[j]);
+    //adding all the random ids and data to list
+    for (int i = 0; i < num_tests; i++) {
+        if(!list.addNode(ids[i], data[i])){
+            list.getNode(ids[i], tempDataNode);
+            if(tempDataNode->id == ids[i]){
+                cout << "\nID already exists in list." << endl;
+            }else{
+                cout << "\nerror: something went wrong." << endl;
+                print_list_switch = false;
+            }
+        } else {
+            list.addNode(ids[i], data[i]);
+        }
     }
-    cout << "ADDED " << new_item.getCount() << " RANDOM NODES" << endl << endl;
+    cout << "\nAdding test nodes to list..." << endl;
+    cout << "ADDED " << list.getCount() << " RANDOM NODES TO LIST" << endl << endl;
 
-    new_item.printList(true);
+    //printing list with random ids
+    if(print_list_switch){
+        list.printList(print_list_switch);
+    } else {
+        cout << "\nerror: something went wrong." << endl;
+    }
 
+    //******************************************TESTING ADD TO HEAD BELOW******************************************
+
+    //making test case parallel arrays to hold test data for add head
+    int num_head_tests = rand() % (TEST_HEAD_TAIL_BASE+1) + TEST_HEAD_TAIL_OFFSET;
+
+    int head_ids[num_head_tests];
+    char *head_data[num_head_tests];
+    for (int i = 0; i < num_head_tests; i++) {
+        head_data[i] = new char[BUFFER_SIZE-2];
+    }
+
+    //making random nodes to add to head
+    cout << "Making " << num_head_tests << " random head nodes..." << endl;
+    make_head_cases(head_ids, head_data, num_head_tests);
+    cout << "HEAD NODES CREATED" << endl << endl;
+
+    for (int i = 0; i < num_head_tests; ++i) {
+        if(!list.addNode(head_ids[i], head_data[i])){
+            cout << "\nerror: something went wrong." << endl;
+            print_list_switch = false;
+        }else{
+            list.addNode(head_ids[i], head_data[i]);
+        }
+    }
+    cout << "\nADDED " << num_head_tests << " RANDOM NODES TO THE HEAD OF LIST" << endl;
+
+    //printing list with heads added
+    if(print_list_switch){
+        list.printList(print_list_switch);
+    } else {
+        cout << "\nerror: something went wrong." << endl;
+    }
+
+    //******************************************TESTING ADD TO TAIL BELOW******************************************
+
+    //making test case parallel arrays to hold test data for add head
+    int num_tail_tests = rand() % (TEST_HEAD_TAIL_BASE + 1) + TEST_HEAD_TAIL_OFFSET;
+
+    //making test case parallel arrays to hold test data for add tail
+    int tail_ids[num_tail_tests];
+    char *tail_data[num_tail_tests];
+    for (int i = 0; i < num_tail_tests; i++) {
+        tail_data[i] = new char[BUFFER_SIZE-2];
+    }
+
+    //making random nodes to add to tail
+    cout << "Making " << num_head_tests << " random tail nodes..." << endl;
+    make_tail_cases(head_ids, head_data, num_head_tests);
+    cout << "TAIL NODES CREATED" << endl << endl;
+
+    for (int i = 0; i < num_head_tests; ++i) {
+        if(!list.addNode(head_ids[i], head_data[i])){
+            cout << "\nerror: something went wrong." << endl;
+            print_list_switch = false;
+        }else{
+            list.addNode(head_ids[i], head_data[i]);
+        }
+    }
+    cout << "\nADDED " << num_head_tests << " RANDOM NODES TO THE TAIL OF LIST" << endl;
+
+    //printing list with tails added
+    if(print_list_switch){
+        list.printList(print_list_switch);
+    } else {
+        cout << "\nerror: something went wrong." << endl;
+    }
+
+
+
+
+/*
     int search_id;
     cout << "(Testing delete node method) Enter ID to search for: ";
     cin >> search_id;
-    new_item.deleteNode(search_id);
+    list.deleteNode(search_id);
     cout << "Item Deleted." << endl;
-    new_item.printList(true);
+    list.printList(true);
 
     int get_id;
-    auto tempDataNode = new DataNode;
     cout << "(Testing get node method) Enter ID to search for: ";
     cin >> get_id;
-    new_item.getNode(get_id, tempDataNode);
+    list.getNode(get_id, tempDataNode);
     cout << "\nID in Data Node: " << tempDataNode->id << "\tData in Data Node: " << tempDataNode->data << endl;
 
     cout << "\nTesting list clear..." << endl;
-    if(new_item.clear()){
+    if(list.clear()){
         cout << "List Cleared." << endl << endl;
     }
-
-    new_item.printList(true);
+*/
 
     return 0;
 }
