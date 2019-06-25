@@ -124,10 +124,12 @@ int main() {
     }
 
     //******************************************TESTING DELETE NODES******************************************
+
+    //delete random number of heads
     int num_to_del = rand() % (TEST_HEAD_TAIL_BASE+1) + TEST_HEAD_TAIL_OFFSET;
     int del_count = 0;
     auto nodeToDel = new DataNode;
-    cout << "Deleting head list item " << num_to_del << " times..." << endl;
+    cout << "Deleting head list item " << num_to_del << " times...\n" << endl;
     for (int i = 0; i < num_to_del; i++) {
         for (int j = 0; j <= MAX_ADD_TAIL_ID; j++) {
             if(list.getNode(j, nodeToDel) && del_count < num_to_del){
@@ -136,8 +138,41 @@ int main() {
             }
         }
     }
+    //prints list with deleted heads
+    if(print_list_switch){
+        list.printList(print_list_switch);
+    } else {
+        cout << "\nerror: something went wrong." << endl;
+    }
 
-    list.printList(print_list_switch);
+    //delete random number of middle items
+    auto tempNodeToDel = new DataNode;
+    del_count = 0;
+    cout << "Deleting middle list item " << num_to_del << " times... (2nd item in list when not also the tail)\n" << endl;
+    for (int i = 0; i < num_to_del; i++) {
+        for (int j = 0; j <= MAX_ADD_TAIL_ID; j++) {
+            if(list.getNode(j, nodeToDel) && del_count < num_to_del+1){     //bypasses first id to be deleted by incrementing
+                if(del_count ==  0){                                        //count without deleting the first match (the head)
+                    del_count++;
+                }else{
+                    list.deleteNode(nodeToDel->id);
+                    del_count++;
+                }
+            }
+        }
+    }
+    //prints list with deleted middles
+    if(print_list_switch){
+        list.printList(print_list_switch);
+    } else {
+        cout << "\nerror: something went wrong." << endl;
+    }
+
+
+    //delete random number of tails
+
+
+
 
     return 0;
 }
