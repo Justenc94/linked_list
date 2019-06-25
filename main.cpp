@@ -146,9 +146,8 @@ int main() {
     }
 
     //delete random number of middle items
-    auto tempNodeToDel = new DataNode;
     del_count = 0;
-    cout << "Deleting middle list item " << num_to_del << " times... (2nd item in list when not also the tail)\n" << endl;
+    cout << "Deleting middle list item " << num_to_del << " times... (2nd item in list)\n" << endl;
     for (int i = 0; i < num_to_del; i++) {
         for (int j = 0; j <= MAX_ADD_TAIL_ID; j++) {
             if(list.getNode(j, nodeToDel) && del_count < num_to_del+1){     //bypasses first id to be deleted by incrementing
@@ -170,7 +169,23 @@ int main() {
 
 
     //delete random number of tails
-
+    del_count = 0;
+    nodeToDel = new DataNode;
+    cout << "Deleting tail list item " << num_to_del << " times...\n" << endl;
+    for (int i = 0; i < num_to_del; i++) {
+        for (int j = MAX_ADD_TAIL_ID+10000; j > 0; j--) {
+            if(list.getNode(j, nodeToDel) && del_count < num_to_del){
+                list.deleteNode(nodeToDel->id);
+                del_count++;
+            }
+        }
+    }
+    //prints list with deleted tails
+    if(print_list_switch){
+        list.printList(print_list_switch);
+    } else {
+        cout << "\nerror: something went wrong." << endl;
+    }
 
 
 
