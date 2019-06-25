@@ -11,7 +11,7 @@ Purpose:
 
 #define TEST_CASE_BASE 25
 #define TEST_CASE_OFFSET 5
-#define TEST_HEAD_TAIL_BASE 10
+#define TEST_HEAD_TAIL_BASE 3
 #define TEST_HEAD_TAIL_OFFSET 2
 
 #endif //MAIN_H

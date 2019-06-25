@@ -80,7 +80,7 @@ int main() {
             list.addNode(head_ids[i], head_data[i]);
         }
     }
-    cout << "\nADDED " << num_head_tests << " RANDOM NODES TO THE HEAD OF LIST" << endl;
+    cout << "\nADDED " << num_head_tests << " RANDOM NODES TO THE HEAD OF LIST" << endl << endl;
 
     //printing list with heads added
     if(print_list_switch){
@@ -102,19 +102,19 @@ int main() {
     }
 
     //making random nodes to add to tail
-    cout << "Making " << num_head_tests << " random tail nodes..." << endl;
-    make_tail_cases(head_ids, head_data, num_head_tests);
+    cout << "Making " << num_tail_tests << " random tail nodes..." << endl;
+    make_tail_cases(tail_ids, tail_data, num_tail_tests);
     cout << "TAIL NODES CREATED" << endl << endl;
 
-    for (int i = 0; i < num_head_tests; ++i) {
-        if(!list.addNode(head_ids[i], head_data[i])){
+    for (int i = 0; i < num_tail_tests; ++i) {
+        if(!list.addNode(tail_ids[i], tail_data[i])){
             cout << "\nerror: something went wrong." << endl;
             print_list_switch = false;
         }else{
-            list.addNode(head_ids[i], head_data[i]);
+            list.addNode(tail_ids[i], tail_data[i]);
         }
     }
-    cout << "\nADDED " << num_head_tests << " RANDOM NODES TO THE TAIL OF LIST" << endl;
+    cout << "\nADDED " << num_tail_tests << " RANDOM NODES TO THE TAIL OF LIST" << endl << endl;
 
     //printing list with tails added
     if(print_list_switch){
@@ -123,28 +123,21 @@ int main() {
         cout << "\nerror: something went wrong." << endl;
     }
 
-
-
-
-/*
-    int search_id;
-    cout << "(Testing delete node method) Enter ID to search for: ";
-    cin >> search_id;
-    list.deleteNode(search_id);
-    cout << "Item Deleted." << endl;
-    list.printList(true);
-
-    int get_id;
-    cout << "(Testing get node method) Enter ID to search for: ";
-    cin >> get_id;
-    list.getNode(get_id, tempDataNode);
-    cout << "\nID in Data Node: " << tempDataNode->id << "\tData in Data Node: " << tempDataNode->data << endl;
-
-    cout << "\nTesting list clear..." << endl;
-    if(list.clear()){
-        cout << "List Cleared." << endl << endl;
+    //******************************************TESTING DELETE NODES******************************************
+    int num_to_del = rand() % (TEST_HEAD_TAIL_BASE+1) + TEST_HEAD_TAIL_OFFSET;
+    int del_count = 0;
+    auto nodeToDel = new DataNode;
+    cout << "Deleting head list item " << num_to_del << " times..." << endl;
+    for (int i = 0; i < num_to_del; i++) {
+        for (int j = 0; j <= MAX_ADD_TAIL_ID; j++) {
+            if(list.getNode(j, nodeToDel) && del_count < num_to_del){
+                list.deleteNode(nodeToDel->id);
+                del_count++;
+            }
+        }
     }
-*/
+
+    list.printList(print_list_switch);
 
     return 0;
 }
