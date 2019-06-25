@@ -182,6 +182,8 @@ int main() {
             if(list.getNode(j, nodeToDel) && del_count < num_to_del){
                 list.deleteNode(nodeToDel->id);
                 del_count++;
+            }else if(list.getCount() == 0){
+                cout << "Cannot delete ID, list is empty." << endl;
             }
         }
     }
@@ -197,17 +199,15 @@ int main() {
     //******************************************TESTING GET NODE******************************************
 
     //calls the getnode method on every item in list to show that any position is get-able
-    int get_counter = 0;
     auto nodeToGet = new DataNode;
     auto tempGetNode = new DataNode;
 
     cout << "======= Testing getNode() on entire list =======" << endl;
-    for (int j = 0; j <= MAX_ADD_TAIL_ID+10000; j++) {
+    for (int j = 0; j <= MAX_ADD_TAIL_ID+15000; j++) {
         list.getNode(j, nodeToGet);
         if(nodeToGet->id == j){
             list.getNode(nodeToGet->id, tempGetNode);
             cout << "Get Node on ID: " << tempGetNode->id << "\tData: " << tempGetNode->data << endl;
-            get_counter++;
         }
     }
     cout << "================================================" << endl << endl;
@@ -222,18 +222,37 @@ int main() {
         random_ids[i] = random_id;
     }
 
-    cout << "Testing get line on ID that is not in list " << num_wrong_ids << " times..." << endl;
+    cout << "Testing get node on ID that is not in list " << num_wrong_ids << " times...\n" << endl;
     for (int i = 0; i < num_wrong_ids; i++) {
         cout << "Searching list for ID: " << random_ids[i] << endl;
         if(!list.getNode(random_ids[i], tempGetNode)){                       //if getnode is not successful in search
-            cout << "Getnode returned false. ID not found." << endl;
+            cout << "ID not found. Cannot get ID." << endl;
         }else{
             list.getNode(random_ids[i], tempGetNode);                       //if getnode is succesful returns get of that ID
             cout << "Get Node on ID: " << tempGetNode->id << "\tData: " << tempGetNode->data << endl;
         }
     }
+    cout << "\n*****Testing get node complete*****" << endl << endl;
 
     //TODO: Need to build a test to show that you cannot delete an item in an empty list or an ID that doesnt exist
+
+    //testing delete on empty list and ID that doesnt exist
+    cout << "Testing delete node on ID that is not in list " << num_wrong_ids << " times...\n" << endl;
+    for (int i = 0; i < num_wrong_ids; i++) {
+        cout << "Searching to delete list ID: " << random_ids[i] << endl;
+        if(!list.deleteNode(random_ids[i])){                       //if getnode is not successful in search
+            cout << "ID not found. Cannot delete ID." << endl;
+        }else{
+            list.deleteNode(random_ids[i]);                       //if getnode is succesful returns get of that ID
+            cout << "Delete Node on ID: " << tempGetNode->id << "\tData: " << tempGetNode->data << endl;
+        }
+    }
+    cout << "\n*****Testing delete node on wrong IDs and empty list complete*****" << endl << endl;
+
+
+
+
+
 
     //TODO: Need to build a test to show that you can clear a list, with cases: 0, 1, or greater than 1 nodes
 

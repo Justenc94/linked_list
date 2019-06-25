@@ -13,7 +13,7 @@ List::List() {
 //********************************************PUBLIC METHODS********************************************
 bool List::addNode(int new_id, string new_data) {
     Node *temp_node = head;
-    if (searchIds(new_id) == count) {
+    if (searchIds(new_id) == -1) {
         Node *new_node = new Node;
         new_node->id = new_id;
         new_node->data = new_data;
@@ -45,9 +45,11 @@ bool List::deleteNode(int del_id){
     }else if(search == count){
         deleteTail(search);
         return true;
-    }else{
+    }else if(search != -1){
         deleteMiddle(search);
         return true;
+    }else{
+        return false;
     }
 }
 
@@ -107,9 +109,12 @@ int List::searchIds(int id_search){
         while(temp_node->next != nullptr && id_search == temp_node->id){
             return (i+1);
         }
+        if((temp_node->next == nullptr && count != 0) && id_search == temp_node->id){
+            return (i+1);
+        }
         temp_node = temp_node->next;
     }
-    return count;
+    return -1;
 }
 
 int List::getNodePos(int id_search){
