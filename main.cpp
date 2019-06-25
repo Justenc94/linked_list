@@ -28,16 +28,17 @@ int main() {
     bool print_list_switch = true;
 
     //filling arrays with test node data
-    cout << "Making " << num_tests << " random test nodes..." << endl;
+    cout << "Making " << num_tests << " random test nodes...\n" << endl;
     make_test_cases(ids, data, num_tests);
-    cout << "TEST NODES CREATED" << endl;
 
     //adding all the random ids and data to list
+    cout << "Node count: " << list.getCount() << endl;
+    cout << "Adding test nodes to list..." << endl;
     for (int i = 0; i < num_tests; i++) {
         if(!list.addNode(ids[i], data[i])){
             list.getNode(ids[i], tempDataNode);
             if(tempDataNode->id == ids[i]){
-                cout << "\nID already exists in list." << endl;
+                cout << "\nID already exists in list, not added." << endl;
             }else{
                 cout << "\nerror: something went wrong." << endl;
                 print_list_switch = false;
@@ -46,8 +47,7 @@ int main() {
             list.addNode(ids[i], data[i]);
         }
     }
-    cout << "\nAdding test nodes to list..." << endl;
-    cout << "ADDED " << list.getCount() << " RANDOM NODES TO LIST" << endl << endl;
+    cout << "Node count: " << list.getCount() << endl << endl;
 
     //printing list with random ids
     if(print_list_switch){
@@ -68,10 +68,9 @@ int main() {
     }
 
     //making random nodes to add to head
-    cout << "Making " << num_head_tests << " random head nodes..." << endl;
     make_head_cases(head_ids, head_data, num_head_tests);
-    cout << "HEAD NODES CREATED" << endl << endl;
-
+    cout << "Node count: " << list.getCount() << endl;
+    cout << "Adding " << num_head_tests << " random nodes to the head of the list" << endl;
     for (int i = 0; i < num_head_tests; ++i) {
         if(!list.addNode(head_ids[i], head_data[i])){
             cout << "\nerror: something went wrong." << endl;
@@ -80,7 +79,7 @@ int main() {
             list.addNode(head_ids[i], head_data[i]);
         }
     }
-    cout << "\nADDED " << num_head_tests << " RANDOM NODES TO THE HEAD OF LIST" << endl << endl;
+    cout << "Node count: " << list.getCount() << endl << endl;
 
     //printing list with heads added
     if(print_list_switch){
@@ -102,10 +101,9 @@ int main() {
     }
 
     //making random nodes to add to tail
-    cout << "Making " << num_tail_tests << " random tail nodes..." << endl;
     make_tail_cases(tail_ids, tail_data, num_tail_tests);
-    cout << "TAIL NODES CREATED" << endl << endl;
-
+    cout << "Node count: " << list.getCount() << endl;
+    cout << "Adding " << num_tail_tests << " random nodes to the tail of the list" << endl;
     for (int i = 0; i < num_tail_tests; ++i) {
         if(!list.addNode(tail_ids[i], tail_data[i])){
             cout << "\nerror: something went wrong." << endl;
@@ -114,7 +112,7 @@ int main() {
             list.addNode(tail_ids[i], tail_data[i]);
         }
     }
-    cout << "\nADDED " << num_tail_tests << " RANDOM NODES TO THE TAIL OF LIST" << endl << endl;
+    cout << "Node count: " << list.getCount() << endl << endl;
 
     //printing list with tails added
     if(print_list_switch){
@@ -129,7 +127,8 @@ int main() {
     int num_to_del = rand() % (TEST_HEAD_TAIL_BASE+1) + TEST_HEAD_TAIL_OFFSET;
     int del_count = 0;
     auto nodeToDel = new DataNode;
-    cout << "Deleting head list item " << num_to_del << " times...\n" << endl;
+    cout << "Node count: " << list.getCount() << endl;
+    cout << "Deleting head list node " << num_to_del << " times..." << endl;
     for (int i = 0; i < num_to_del; i++) {
         for (int j = 0; j <= MAX_ADD_TAIL_ID; j++) {
             if(list.getNode(j, nodeToDel) && del_count < num_to_del){
@@ -138,6 +137,8 @@ int main() {
             }
         }
     }
+    cout << "Node count: " << list.getCount() << endl << endl;
+
     //prints list with deleted heads
     if(print_list_switch){
         list.printList(print_list_switch);
@@ -147,7 +148,8 @@ int main() {
 
     //delete random number of middle items
     del_count = 0;
-    cout << "Deleting middle list item " << num_to_del << " times... (2nd item in list)\n" << endl;
+    cout << "Node count: " << list.getCount() << endl;
+    cout << "Deleting middle list node " << num_to_del << " times... (2nd node)" << endl;
     for (int i = 0; i < num_to_del; i++) {
         for (int j = 0; j <= MAX_ADD_TAIL_ID; j++) {
             if(list.getNode(j, nodeToDel) && del_count < num_to_del+1){     //bypasses first id to be deleted by incrementing
@@ -160,6 +162,8 @@ int main() {
             }
         }
     }
+    cout << "Node count: " << list.getCount() << endl << endl;
+
     //prints list with deleted middles
     if(print_list_switch){
         list.printList(print_list_switch);
@@ -171,7 +175,8 @@ int main() {
     //delete random number of tails
     del_count = 0;
     nodeToDel = new DataNode;
-    cout << "Deleting tail list item " << num_to_del << " times...\n" << endl;
+    cout << "Node count: " << list.getCount() << endl;
+    cout << "Deleting tail list node " << num_to_del << " times..." << endl;
     for (int i = 0; i < num_to_del; i++) {
         for (int j = MAX_ADD_TAIL_ID+10000; j > 0; j--) {
             if(list.getNode(j, nodeToDel) && del_count < num_to_del){
@@ -180,6 +185,8 @@ int main() {
             }
         }
     }
+    cout << "Node count: " << list.getCount() << endl << endl;
+
     //prints list with deleted tails
     if(print_list_switch){
         list.printList(print_list_switch);
@@ -187,7 +194,7 @@ int main() {
         cout << "\nerror: something went wrong." << endl;
     }
 
-
+    
 
     return 0;
 }
