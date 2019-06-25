@@ -98,6 +98,7 @@ bool List::clear(){
             temp_node = del_node;
         }
         count = 0;
+        head = nullptr;
         return true;
     }else{
         return false;
@@ -110,10 +111,13 @@ bool List::clear(){
 int List::searchIds(int id_search){
     Node *temp_node = head;
     for (int i = 0; i < count; i++) {
-        while(temp_node->next != nullptr && id_search == temp_node->id){
+        if(count == 0){
+            return -1;
+        }
+        else if(temp_node->next != nullptr && id_search == temp_node->id){
             return (i+1);
         }
-        if((temp_node->next == nullptr && count != 0) && id_search == temp_node->id){
+        else if((temp_node->next == nullptr && count != 0) && id_search == temp_node->id){
             return (i+1);
         }
         temp_node = temp_node->next;

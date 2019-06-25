@@ -289,6 +289,7 @@ int main() {
     //testing clear on list with 1 node
     add_node_num = 1;
 
+    cout << "Adding 1 node to list..." << endl;
     for (int i = 0; i < add_node_num; i++) {
         list.addNode(ids[i], data[i]);
     }
@@ -304,6 +305,12 @@ int main() {
     cout << "Node count: " << list.getCount() << endl << endl;
 
     //testing clear on list with more than 1 node
+    add_node_num = rand() % (TEST_HEAD_TAIL_BASE+1) + TEST_HEAD_TAIL_OFFSET;
+    cout << "Adding " << add_node_num << " Nodes to the list..." << endl;
+
+    for (int i = 0; i < add_node_num; i++) {
+        list.addNode(ids[i], data[i]);
+    }
 
     cout << "Node count: " << list.getCount() << endl;
     cout << "Testing clear list on list with more than 1 node..." << endl;
@@ -314,6 +321,8 @@ int main() {
         cout << "List is already empty. Not cleared." << endl;
     }
     cout << "Node count: " << list.getCount() << endl << endl;
+
+    cout << "\n*****Testing clear list on multiple cases complete*****" << endl << endl;
 
     return 0;
 }
