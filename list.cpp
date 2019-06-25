@@ -10,6 +10,10 @@ List::List() {
     count = 0;
 }
 
+List::~List(){
+    clear();
+}
+
 //********************************************PUBLIC METHODS********************************************
 bool List::addNode(int new_id, string new_data) {
     Node *temp_node = head;

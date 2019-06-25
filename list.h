@@ -15,7 +15,11 @@ class List
 {
     public:
 
+    //constructor
     List();
+    //destructor
+    ~List();
+    //public methods
     bool addNode(int, string);
     bool deleteNode(int);
     bool getNode(int, DataNode*);
