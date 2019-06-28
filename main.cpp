@@ -121,6 +121,11 @@ int main() {
         cout << "\nerror: something went wrong." << endl;
     }
 
+    //printing list backwards
+    cout << "Testing print list backwards..." << endl;
+    list.printList(false);
+    cout << "\n*****Testing print list backwards complete*****" << endl << endl;
+
     //******************************************TESTING DELETE NODES******************************************
 
     //delete random number of heads
@@ -323,6 +328,8 @@ int main() {
     cout << "Node count: " << list.getCount() << endl << endl;
 
     cout << "\n*****Testing clear list on multiple cases complete*****" << endl << endl;
+
+
 
     return 0;
 }
